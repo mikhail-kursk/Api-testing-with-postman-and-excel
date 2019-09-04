@@ -1,0 +1,354 @@
+{
+	"info": {
+		"_postman_id": "29e0c7c4-d87b-4c5e-aea6-b31a43024186",
+		"name": "API Collection_to_share",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "empty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ae6094bf-f8b4-456d-b1dd-abac0397e00b",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "8658226e-a40f-48e5-ae4a-fdab70302747",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "df1930f1-e0ab-46b9-9cea-3cfe7ffd79ca",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{request_url}}",
+					"host": [
+						"{{request_url}}"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "fd2014be-7e35-42c0-a5b3-4b398776b610",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "e7ceaab0-7529-4c34-926c-15a028b3e88a",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{Request_Data}}"
+				},
+				"url": {
+					"raw": "{{request_url}}",
+					"host": [
+						"{{request_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "bf323da6-2069-4d8a-8f3f-f7fcb3a6cc63",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "dc5e048c-a7f8-497c-96ff-9df221b9ac05",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{{Request_Data}}"
+				},
+				"url": {
+					"raw": "{{request_url}}",
+					"host": [
+						"{{request_url}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "eb2bde6d-eada-488e-8336-8e16f00f802f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"id": "ef196e4f-5a38-4bd2-a446-30214ea6a18e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{request_url}}",
+					"host": [
+						"{{request_url}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3c938b18-50bc-432f-aa71-810920efb139",
+				"type": "text/javascript",
+				"exec": [
+					"if (pm.variables.get(\"TC\") !== iteration){",
+					"    pm.variables.set(\"request\", null)",
+					"}",
+					"",
+					"pm.variables.set(\"TC\", iteration);",
+					"",
+					"if ((pm.variables.get(\"request\") === undefined) || (pm.variables.get(\"request\") === null)){",
+					"    pm.variables.set(\"request\", parseInt(-1));",
+					"}",
+					"",
+					"if (data.length > pm.variables.get(\"request\") + 1)",
+					"{",
+					"    postman.setNextRequest(data[pm.variables.get(\"request\") + 1].request_type);",
+					"}",
+					"else",
+					"{",
+					"    postman.setNextRequest(null);",
+					"}",
+					"",
+					"if (pm.variables.get(\"request\") != -1)",
+					"{",
+					"    var request_data = data[pm.variables.get(\"request\")];",
+					"    ",
+					"    if (request_data.PC !== null && request_data.PC !== undefined){",
+					"            if (request_data.PC.command == \"terminate\"){",
+					"                console.log(\"terminate\")",
+					"               postman.setNextRequest(null);",
+					"            }",
+					"    }",
+					"    ",
+					"    ",
+					"    if (request_data.PI !== null && request_data.PI !== undefined)",
+					"    {",
+					"        for (let key in request_data.PI) {",
+					"            pm.variables.set(key, request_data.PI[key]);",
+					"        }",
+					"    }",
+					"    ",
+					"    if (request_data.I !== null && request_data.I !== undefined)",
+					"    {",
+					"        pm.variables.set(\"Request_Data\", JSON.stringify(request_data.I));",
+					"    }",
+					"    ",
+					"    pm.variables.set (\"request_url\", request_data.url);",
+					"}",
+					"",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "b605ebaf-bb3d-43bb-8fb9-445b81d78d72",
+				"type": "text/javascript",
+				"exec": [
+					"console.log(\"POST section \")",
+					"",
+					"if (pm.variables.get(\"request\") != -1)",
+					"{",
+					"    var request_data = data[pm.variables.get(\"request\")];",
+					"    ",
+					"    if (request_data.H !== null && request_data.H !== undefined)",
+					"    {",
+					"        pm.test(\"Check response code and compare with expectation\", function () {",
+					"            pm.response.to.have.status(request_data.H[\"response code\"]);",
+					"        });",
+					"    }",
+					"    ",
+					"    if (request_data.PO !== null && request_data.PO !== undefined)",
+					"    {",
+					"        pm.test(\"Output data has been saved\", function () {",
+					"        var response = JSON.parse(responseBody);",
+					"        for (let key in request_data.PO) {",
+					"            if (response[key] !== null) {",
+					"                pm.variables.set(key, response[key]);",
+					"            }",
+					"        }",
+					"        });",
+					"    }",
+					"    ",
+					"    // Check results of the request",
+					"    if (request_data.O !== null && request_data.O !== undefined)",
+					"    {",
+					"        pm.test(\"Compare result and expectation\", function () {",
+					"        var response = JSON.parse(responseBody);",
+					"        ",
+					"        check_attribute = function (response, etalon, guard)",
+					"        {",
+					"            if (++guard >= 20) return;",
+					"            for (let key in etalon) {",
+					"                    if (response[key] == '[object Object]'){",
+					"                        check_attribute (response[key], etalon[key], guard);",
+					"                        continue;",
+					"                    }",
+					"                pm.expect(toString(response[key])).to.equal(toString(etalon[key]));",
+					"            }",
+					"            return;",
+					"        };",
+					"        ",
+					"        var response = JSON.parse(responseBody);",
+					"    ",
+					"        check_attribute (response, request_data.O, 0);",
+					"        });",
+					"    }",
+					"}",
+					"",
+					"pm.variables.set(\"request\", pm.variables.get(\"request\") + 1);",
+					"",
+					"if (pm.variables.get(\"request\") == data.length){",
+					"    pm.variables.set(\"request\", null);",
+					"}"
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "115c4432-f130-423a-86fe-c85024a92471",
+			"key": "request_url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "0583d1c5-208d-44d1-9fc9-e59656d3ad2e",
+			"key": "test_case",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "4c2733a7-6a90-4681-b73a-325e8d8767d8",
+			"key": "test_type",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"id": "245180de-a978-4d91-bfa9-553f86506a28",
+			"key": "url",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
