@@ -1,0 +1,1 @@
+cscript.exe //NoLogo "Your path to vb script"/GenerateJsonFiles.vbs
